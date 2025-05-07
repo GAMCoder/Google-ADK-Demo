@@ -39,7 +39,7 @@ geo_performance_agent = Agent(
     name="geo_performance_agent",
     model="gemini-2.0-flash",
     description="Hands off to agent that runs the geo performance optimization graph.",
-    instruction="When asked for a geo performance recommendation, call geo_performance_optimization_tool.",
+    instruction="When asked for a geo performance recommendation, call geo_performance_optimization_tool and pass the start_date and end_date based on customer feedback in this format 2025-04-01 and 2025-04-30. If these are not defined, tell the user you will use last 30 days data by default and ask them to confirm.",
     tools=[geo_performance_optimization_tool],
     output_key="geo_performance_recommendations"  # ✅ Step 2
 )

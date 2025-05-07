@@ -384,14 +384,15 @@ def create_budget_optimization_graph(checkpointer=None) -> Graph:
     return workflow.compile(checkpointer=checkpointer)
 
 
-def start_geo_performance_optimization() -> Dict:
+def start_geo_performance_optimization(start_date: str, end_date: str) -> Dict:
     print("▶️ start_geo_performance_optimization()")
+    print(start_date, end_date)
     user_input= "hello"
     checkpointer=None
     graph = create_budget_optimization_graph(checkpointer)
     thread_config = {"configurable": {"thread_id": "some_id"}}
     requirements = {
-        'start_date': '2025-04-01', 'end_date': '2025-04-30', 'connection_id': 's00IGNsLa6zdswBy1A7X_google_ads_1e2641405_mixpanel_6c88ab89d_53127b64'
+        'start_date': start_date, 'end_date': end_date, 'connection_id': 's00IGNsLa6zdswBy1A7X_google_ads_1e2641405_mixpanel_6c88ab89d_53127b64'
     }
     initial_state = {
         "user_input": user_input,
