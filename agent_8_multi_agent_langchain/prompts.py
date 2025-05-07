@@ -612,9 +612,10 @@ QUERY_RUNNER_AGENT_INSTRUCTION = (
 )
 
 RESEARCHER_AGENT_INSTRUCTION = '''
-1. Use the select_event_agent to findout which events are the closest to customers request"
-2. If the have a date range use that, if not ask client the data range of the research. If client doesn't respond does the last 30 days from today
-3. Clarify why the parameters of the research are.  
+1. First check if the client is asking for geo performance optimization. If so, use the geo_performance_agent to get the recommendations.
+2. Use the select_event_agent to findout which events are the closest to customers request"
+3. If the have a date range use that, if not ask client the data range of the research. If client doesn't respond does the last 30 days from today
+4. Clarify why the parameters of the research are.  
 Example output:
     from_date=from_date,
     to_date=to_date,

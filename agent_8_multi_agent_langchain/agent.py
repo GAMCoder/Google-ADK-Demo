@@ -32,14 +32,17 @@ from .mixpanel_tools import query_mixpanel
 # ────────────────────────────────────────────────────────────────────────────
 # 2. Sub-agents (optional - each can focus on a single sub-task)
 # ────────────────────────────────────────────────────────────────────────────
+from google.adk.agents import Agent
+from .research_agents.geo_performance_agent.agent_graph import geo_performance_optimization_tool  # import the tool you created
 
-marketing_effectiveness_agent = Agent(
-    name="marketing_effectiveness_agent",
+geo_performance_agent = Agent(
+    name="geo_performance_agent",
     model="gemini-2.0-flash",
-    description="Chooses the correct Mixpanel events based on the user's goal.",
-    instruction=SELECT_EVENT_AGENT_INSTRUCTION
+    description="Hands off to agent that runs the geo performance optimization graph.",
+    instruction="When asked for a geo performance recommendation, call geo_performance_optimization_tool.",
+    tools=[geo_performance_optimization_tool],
+    output_key="geo_performance_recommendations"  # ✅ Step 2
 )
-
 
 
 # this is the agent that selects the correct Mixpanel events based on the user's goal.
@@ -70,7 +73,8 @@ researcher = Agent(
     instruction=RESEARCHER_AGENT_INSTRUCTION,
     tools=[
         AgentTool(agent=select_event_agent),
-        AgentTool(agent=query_runner_agent)
+        AgentTool(agent=query_runner_agent),
+        AgentTool(agent=geo_performance_agent)
     ]
 )
 
